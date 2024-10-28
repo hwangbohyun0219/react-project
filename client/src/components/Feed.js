@@ -27,14 +27,14 @@ import CloseIcon from '@mui/icons-material/Close';
 const mockFeeds = [
   {
     id: 1,
-    title: '게시물 1',
-    description: '이것은 게시물 1의 설명입니다.',
+    title: '맛있는 크루아상 샌드위치',
+    description: '',
     image: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
   },
   {
     id: 2,
-    title: '게시물 2',
-    description: '이것은 게시물 2의 설명입니다.',
+    title: '바다에서 수영하고 싶다',
+    description: '',
     image: 'https://images.unsplash.com/photo-1521747116042-5a810fda9664',
   },
   // 추가 피드 데이터
