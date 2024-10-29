@@ -3,27 +3,46 @@ import { Container, Typography, Box, Avatar, Grid, Paper } from '@mui/material';
 import axios from 'axios';
 
 function MyPage() {
+  const [userInfo, setUserInfo] = useState({}); // 사용자 정보 상태
   const [followerCount, setFollowerCount] = useState(0); // 팔로워 수 상태
 
   useEffect(() => {
-    async function fetchFollowerCount() {
-      try {
-        const response = await axios.post('http://localhost:3100/follower', {
-          name: '@loveholicdoo', // 여기서 요청할 이름을 입력하세요
-        });
+    const storedUserInfo = localStorage.getItem('userInfo');
 
-        if (response.data.success) {
-          setFollowerCount(response.data.count); // 팔로워 수를 상태에 저장
+    if (storedUserInfo) {
+      try {
+        const parsedUserInfo = JSON.parse(storedUserInfo); // JSON을 자바스크립트 객체로 변환
+        console.log('파싱된 사용자 정보:', parsedUserInfo); // 로그로 데이터 확인
+
+        if (parsedUserInfo && parsedUserInfo.name) {
+          setUserInfo(parsedUserInfo); // 사용자 정보 설정
+          fetchFollowerCount(parsedUserInfo.name); // 팔로워 수 요청
         } else {
-          console.error('팔로워 수 가져오기 실패:', response.data.message);
+          throw new Error("유효하지 않은 사용자 정보");
         }
       } catch (error) {
-        console.error('오류 발생:', error);
+        console.error('사용자 정보 파싱 오류:', error);
+        alert('사용자 정보가 올바르지 않습니다. 로그인 페이지로 이동합니다.');
+        window.location.href = '/login'; // 로그인 페이지로 리다이렉트
       }
+    } else {
+      alert('로그인 정보가 없습니다. 로그인 페이지로 이동합니다.');
+      window.location.href = '/login'; // 로그인 페이지로 리다이렉트
     }
-
-    fetchFollowerCount(); // 컴포넌트가 마운트될 때 팔로워 수를 가져옴
   }, []);
+
+  async function fetchFollowerCount(name) {
+    try {
+      const response = await axios.post('http://localhost:3100/follower', { name });
+      if (response.data.success) {
+        setFollowerCount(response.data.count); // 팔로워 수를 상태에 저장
+      } else {
+        console.error('팔로워 수 가져오기 실패:', response.data.message);
+      }
+    } catch (error) {
+      console.error('오류 발생:', error);
+    }
+  }
 
   return (
     <Container maxWidth="md">
@@ -42,9 +61,9 @@ function MyPage() {
               src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e" // 프로필 이미지 경로
               sx={{ width: 100, height: 100, marginBottom: 2 }}
             />
-            <Typography variant="h5">곽두팔</Typography>
+            <Typography variant="h5">{userInfo.name || "이름이 없습니다."}</Typography>
             <Typography variant="body2" color="text.secondary">
-              @loveholicdoo
+              @{userInfo.name ? userInfo.name : "사용자명"}
             </Typography>
           </Box>
           <Grid container spacing={2} sx={{ marginTop: 2 }}>
