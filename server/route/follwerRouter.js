@@ -7,7 +7,11 @@ router.route("/")
         const { name } = req.body; // 입력된 이름
 
         // follower 테이블에서 행 개수 세기
-        const query = 'SELECT COUNT(*) AS count FROM tbl_follower WHERE name = ?';
+        const query = `
+          SELECT COUNT(*) AS count
+          FROM tbl_follower f
+          JOIN tbl_human h ON f.follower_name = h.name
+          WHERE h.name = ?`;
         connection.query(query, [name], (err, results) => {
             if (err) {
                 console.error(err); // 오류 로그
