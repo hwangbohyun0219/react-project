@@ -17,5 +17,9 @@
 #### 실제프로젝트이미지
 
 ![회원가입](https://github.com/hwangbohyun0219/photo/blob/main/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.PNG)
-
+![로그인](https://github.com/hwangbohyun0219/photo/blob/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8.PNG)
+![피드이미지](https://github.com/hwangbohyun0219/photo/blob/main/%ED%94%BC%EB%93%9C%EC%9D%B4%EB%AF%B8%EC%A7%80.PNG)
+![댓글쓰기1](https://github.com/hwangbohyun0219/photo/blob/main/%EB%8C%93%EA%B8%80%EC%93%B0%EA%B8%B01.PNG)
+![댓글쓰기2](https://github.com/hwangbohyun0219/photo/blob/main/%EB%8C%93%EA%B8%80%EC%93%B0%EA%B8%B02.PNG)
+![등록](https://github.com/hwangbohyun0219/photo/blob/main/%EB%93%B1%EB%A1%9D1.PNG)
 
