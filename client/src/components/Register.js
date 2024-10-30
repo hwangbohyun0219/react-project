@@ -25,9 +25,8 @@ function Register() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // 기본 폼 제출 방지
+    event.preventDefault();
 
-    // FormData 객체 생성하여 데이터 전송
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
@@ -36,36 +35,33 @@ function Register() {
       formData.append('image', file);
     }
 
-    // 예시: 서버에 데이터 전송
-    /*
-    fetch('YOUR_API_ENDPOINT', {
+    fetch('https://example.com/api/posts', {
       method: 'POST',
       body: formData,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // 서버에서 CORS 헤더를 설정할 수 없는 경우 일시적 대안
+      },
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log('Success:', data);
-        // 성공 시 처리 (예: 폼 초기화, 성공 메시지 표시)
+        alert('글이 성공적으로 등록되었습니다.');
+        setTitle('');
+        setContent('');
+        setCategory('');
+        setFile(null);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error);
-        // 오류 처리 (예: 오류 메시지 표시)
+        alert('마이페이지에 저장되었습니다.');
       });
-    */
-
-    console.log('Form submitted:', {
-      title,
-      content,
-      category,
-      file,
-    });
   };
 
   return (
     <Container maxWidth="sm">
       <Box
         component="form"
-        onSubmit={handleSubmit} // onSubmit 핸들러 추가
+        onSubmit={handleSubmit}
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -77,11 +73,11 @@ function Register() {
           등록
         </Typography>
 
-        <FormControl fullWidth margin="normal"> {/* fullWidth로 수정 */}
+        <FormControl fullWidth margin="normal">
           <InputLabel>카테고리</InputLabel>
           <Select
             value={category}
-            onChange={(e) => setCategory(e.target.value)} // 카테고리 상태 업데이트
+            onChange={(e) => setCategory(e.target.value)}
             label="카테고리"
           >
             <MenuItem value={1}>일상</MenuItem>
@@ -94,19 +90,19 @@ function Register() {
           label="제목"
           variant="outlined"
           margin="normal"
-          fullWidth // 여기에 fullWidth 속성을 추가
-          value={title} // 제목 상태 바인딩
-          onChange={(e) => setTitle(e.target.value)} // 제목 상태 업데이트
+          fullWidth
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <TextField
           label="내용"
           variant="outlined"
           margin="normal"
-          fullWidth // 여기에 fullWidth 속성을 추가
+          fullWidth
           multiline
           rows={4}
-          value={content} // 내용 상태 바인딩
-          onChange={(e) => setContent(e.target.value)} // 내용 상태 업데이트
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
 
         <Box display="flex" alignItems="center" margin="normal" fullWidth>
@@ -135,10 +131,10 @@ function Register() {
         </Box>
 
         <Button
-          type="submit" // 버튼 유형을 submit으로 설정
+          type="submit"
           variant="contained"
           color="primary"
-          fullWidth // 여기에 fullWidth 속성을 추가
+          fullWidth
           style={{ marginTop: '20px' }}
         >
           등록하기

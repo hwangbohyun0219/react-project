@@ -22,7 +22,7 @@ function MyPage() {
         }
       } catch (error) {
         console.error('사용자 정보 파싱 오류:', error);
-        alert('사용자 정보가 올바르지 않습니다. 로그인 페이지로 이동합니다.');
+        alert('준비 중입니다. 로그인 페이지로 이동합니다.');
         window.location.href = '/login'; // 로그인 페이지로 리다이렉트
       }
     } else {
@@ -34,10 +34,10 @@ function MyPage() {
   async function fetchFollowerCount(name) {
     try {
       const response = await axios.post('http://localhost:3100/follower', { name });
-      if (response.data.success) {
+      if (response.data && response.data.success) {
         setFollowerCount(response.data.count); // 팔로워 수를 상태에 저장
       } else {
-        console.error('팔로워 수 가져오기 실패:', response.data.message);
+        console.error('팔로워 수 가져오기 실패:', response.data?.message || '알 수 없는 오류');
       }
     } catch (error) {
       console.error('오류 발생:', error);
@@ -63,7 +63,7 @@ function MyPage() {
             />
             <Typography variant="h5">{userInfo.name || "이름이 없습니다."}</Typography>
             <Typography variant="body2" color="text.secondary">
-              @{userInfo.name ? userInfo.name : "사용자명"}
+              @{userInfo.name || "사용자명"}
             </Typography>
           </Box>
           <Grid container spacing={2} sx={{ marginTop: 2 }}>

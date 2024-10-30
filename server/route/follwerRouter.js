@@ -10,7 +10,6 @@ router.route("/")
         const query = `
           SELECT COUNT(*) AS count
           FROM tbl_follower f
-          INNER JOIN tbl_human h ON f.follower_name = h.name
           WHERE h.name = ?`;
         connection.query(query, [name], (err, results) => {
             if (err) {
