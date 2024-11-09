@@ -14,7 +14,7 @@
   
 -----------
 #### 사용언어
-+ JavaScript, react.js
++ JavaScript, react.js, HeidsQL
 
 #### 실제프로젝트이미지
 
